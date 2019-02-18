@@ -1,5 +1,10 @@
 # wisehub-platform-server
 
+WiseHub is an African focused customer intelligence platform that leverages AI-driven data analytics to deliver personalized financial services to best serve customers and drive financial inclusion and economic mobility.
+
+## Presentation
+[Wisehub](https://github.com/j2k850/wisehub-server/blob/master/Wisehub.pdf)
+
 ## Getting Started
 
 ### Dependencies
