@@ -1,0 +1,1 @@
+WiseHub - Investment Reminder: You're investment payment is due on ${due} with a payment of ₦${investmentAmount}. Account number is ${account}.

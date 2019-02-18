@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.1.RELEASE</version>
+	</parent>
+
+	<groupId>com.wisehub.platform</groupId>
+	<artifactId>wisehub-platform-server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+	<name>WiseHub</name>
+	<description>WiseHub</description>
+	<url />
+
+	<modules>
+		<module>data-model</module>
+		<module>core</module>
+		<module>api</module>
+		<module>data-producer</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<springframework.version>5.0.0.RELEASE</springframework.version>
+		<springframeworkboot.version>1.5.8.RELEASE</springframeworkboot.version>
+<!-- 		<springframework.data.version>2.0.0.RELEASE</springframework.data.version> -->
+		<springsecurity.version>4.2.0.RELEASE</springsecurity.version>
+		<hibernate.version>5.2.5.Final</hibernate.version>
+		<hibernate.validator.version>5.3.4.Final</hibernate.validator.version>
+		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<jmockit.version>1.8</jmockit.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		<mockito.version>1.10.19</mockito.version>
+		<joda.version>2.9.6</joda.version>
+		<derby.version>10.13.1.1</derby.version>
+		<dbunit.version>2.5.3</dbunit.version>
+		<java.version>1.8</java.version>
+		<swagger.version>2.5.0</swagger.version>
+		<freemaker.version>2.3.23</freemaker.version>
+		<mailjet.version>4.1.1</mailjet.version>
+		<twilio.version>7.15.4</twilio.version>
+		<cglib.version>3.2.5</cglib.version>
+	</properties>
+
+
+	<scm>
+		<connection>https://github.com/wisehubio/wisehub-platform-server</connection>
+		<developerConnection>https://github.com/wisehubio/wisehub-platform-server</developerConnection>
+		<url>https://github.com/wisehubio/wisehub-platform-server</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>jkwofie</id>
+			<name>Jude Ken-Kwofie</name>
+			<email>jkwofie@wisehub.io</email>
+		</developer>
+	</developers>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Maven Central</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>apache</id>
+			<url>https://repository.apache.org/content/repositories/releases/
+            </url>
+		</repository>
+		<repository>
+			<id>sonatype release</id>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

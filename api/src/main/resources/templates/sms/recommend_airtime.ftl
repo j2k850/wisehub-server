@@ -1,0 +1,1 @@
+WiseHub - Airime: We recommend you purchase ₦${airtimeAmount} of airtime. If yes, click https://platform.wisehub.io/receiveSms?airtime_purchase=1.

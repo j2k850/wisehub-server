@@ -1,0 +1,2 @@
+WiseHub - Insurance: You have made several payments to an educational institution. We recommend you obtain school
+fee protection insurance for ₦${insuranceAmount} this year. This can also serve as security for a loan.

@@ -1,0 +1,1 @@
+WiseHub - Overdraft Reminder: You are about to overdraft on ${due}. To transfer money with USSD, dial *966*Amount*${account}#. 

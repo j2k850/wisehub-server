@@ -1,0 +1,1 @@
+WiseHub - Loans: You have been pre-approved for a salary advance or overdraft loan based on your regular income of ₦${loanAmount}.

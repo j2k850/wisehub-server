@@ -1,0 +1,31 @@
+DROP KEYSPACE IF EXISTS platform;
+CREATE KEYSPACE platform WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+use platform;
+
+CREATE TYPE address (street text,city text,postal_code text,region text,country text,phones set<text>);
+CREATE TYPE fullname (first_name text,last_name text);
+CREATE TYPE rules (rule_name text,rule_description text);
+CREATE TYPE tx_category_amount (account_type text,tx_category text,amount decimal);
+CREATE TYPE product_status (status text,created_at timestamp);
+CREATE TYPE correspondence (event text,type text,description text,created_at timeuuid);
+
+CREATE TABLE users (user_id uuid,bvn BIGINT,name frozen <fullname>,email text,addresses map<text, frozen <address>>,created_at timestamp,updated_at timestamp,PRIMARY KEY (user_id));
+CREATE TABLE accounts (account_id uuid,branch_id  uuid,user_id uuid,account_number BIGINT,account_name text,account_type text,account_status text,created_at timestamp,updated_at timestamp,PRIMARY KEY (account_id));
+CREATE TABLE branches (branch_id uuid,fin_inst_id uuid,branch_name text,branch_mgr text,branch_mgr_email text,addresses map<text, frozen <address>>,created_at timestamp,updated_at timestamp,PRIMARY KEY (branch_id));
+CREATE TABLE transactions (tx_id uuid,account_id uuid,user_id uuid,description text,deposits decimal,withdrawals decimal,balance decimal,date_posted date,created_at timestamp,updated_at timestamp,PRIMARY KEY (tx_id));
+CREATE TABLE financial_institutions (fin_inst_id uuid,financial_institution text,addresses map<text, frozen <address>>,created_at timestamp,updated_at timestamp,PRIMARY KEY (fin_inst_id));
+CREATE TABLE products (product_id uuid,fin_inst_id uuid,product_name text,rules map<text, frozen <rules>>,created_at timestamp,updated_at timestamp,PRIMARY KEY (product_id));
+CREATE TABLE dashboard_users (dashboard_user_id uuid,name frozen <fullname>,email text,addresses map<text, frozen <address>>,created_at timestamp,updated_at timestamp,PRIMARY KEY (dashboard_user_id));
+CREATE TABLE dashboard_roles (dashboard_role_id uuid,dashboard_name text,created_at timestamp,updated_at timestamp,PRIMARY KEY (dashboard_role_id));
+CREATE TABLE dashboard_user_roles (dashboard_user_id uuid,dashboard_role_id uuid,created_at timestamp,updated_at timestamp,PRIMARY KEY (dashboard_user_id, dashboard_role_id));
+CREATE TABLE user_credentials (email text,password text,user_id uuid,PRIMARY KEY (email));
+CREATE TABLE user_fin_insts (user_id uuid,created_at timestamp,fin_inst_id uuid,PRIMARY KEY (user_id, created_at, fin_inst_id)) WITH CLUSTERING ORDER BY (created_at DESC, fin_inst_id ASC);
+CREATE TABLE weekly_expenses_by_user (yyyymmdd text,created_at timestamp,user_id uuid,spent map<text, frozen <tx_category_amount>>,PRIMARY KEY (yyyymmdd, created_at, user_id)) WITH CLUSTERING ORDER BY (created_at DESC, user_id ASC);
+CREATE TABLE weekly_income_by_user (yyyymmdd text,created_at timestamp,user_id uuid,earned map<text, frozen <tx_category_amount>>,PRIMARY KEY (yyyymmdd, created_at, user_id)) WITH CLUSTERING ORDER BY (created_at DESC, user_id ASC);
+CREATE TABLE products_by_user (product_id uuid,created_at timestamp,user_id uuid,product_status map<text, frozen <product_status>>,PRIMARY KEY (product_id, created_at, user_id)) WITH CLUSTERING ORDER BY (created_at DESC, user_id ASC);
+CREATE TABLE accounts_by_productstatus (account_id uuid,created_at timestamp,product_id uuid,product_status map<text, frozen <product_status>>,PRIMARY KEY (account_id, created_at, product_id)) WITH CLUSTERING ORDER BY (created_at DESC, product_id ASC);
+CREATE TABLE financials_by_product (payments_received decimal,fee_income_received decimal,interest_income_received decimal,created_at timestamp,product_id uuid,PRIMARY KEY (created_at, product_id));
+CREATE TABLE correspondence_by_user (user_id uuid,created_at timestamp,event text,correspondence map<text, frozen <correspondence>>,PRIMARY KEY (user_id, created_at, event)) WITH CLUSTERING ORDER BY (created_at DESC, event ASC);
+CREATE TABLE platform_event (user_id uuid,event_timestamp timeuuid,event text,message text,PRIMARY KEY (user_id,event_timestamp,event)) WITH CLUSTERING ORDER BY (event_timestamp DESC,event ASC);
+CREATE TABLE dashboard_event (user_id uuid,event_timestamp timeuuid,event text,message text,PRIMARY KEY (user_id,event_timestamp,event)) WITH CLUSTERING ORDER BY (event_timestamp DESC,event ASC);
+CREATE TABLE dashboard_user_credentials (email text,password text,user_id uuid,PRIMARY KEY (email));

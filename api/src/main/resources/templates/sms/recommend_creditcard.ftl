@@ -1,0 +1,1 @@
+WiseHub - Credit Card: Based on your transaction history, we have pre-approved you for a credit card that provides a credit line of ₦${creditLineAmount}.

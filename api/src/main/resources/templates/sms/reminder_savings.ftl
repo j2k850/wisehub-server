@@ -1,0 +1,1 @@
+WiseHub - Savings Reminder: You're savings transfer is due on ${due} with an amount of ₦${saveAmount}. Account number is ${account}.
